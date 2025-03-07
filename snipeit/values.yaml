@@ -31,9 +31,10 @@ config:
     env: production
     debug: false
     url: http://example.local
+    ## the must start with the string "base64:......"
     key: ""
     timezone: Europe/Berlin
-    locale: en
+    locale: en-US
     envConfig: {}
   ## Name of the secret containing the database connection details
   ## kubectl create secret generic my-db-secret \
@@ -69,6 +70,9 @@ mysql:
 
 persistence:
   enabled: true
+  ## ability to disable the chown of the storage usefull with EKS EFS CSI dynamic provisioning 
+  ## EKS EFS CSI dynamic provisioning don't support chown command 
+  initChownData: true
   annotations: {}
   accessMode: ReadWriteOnce
   existingClaim: ""
