@@ -85,13 +85,14 @@ and their default values.
 | `mysql.persistence.accessMode`       | Access Mode of PV                                     | `ReadWriteOnce`                |
 | `mysql.persistence.size`             | Size of the PV                                        | `8Gi`                          |
 | `persistence.enabled`                | Whether or not Snipe-IT Data should be persisted      | `true`                         |
+| `persistence.initChownData`          | disable the chown init container-for aws efs csi      | `true`                         |
 | `persistence.annotations`            | Annotations for the PVC                               | `{}`                           |
 | `persistence.size`                   | Size of the persistent Snipe-IT Volume                | `2Gi`                          |
 | `replicaCount`                       | Number of Snipe-IT Pods to run                        | `1`                            |
 | `deploymentStrategy`                 | Deployment strategy	                                 | `{ "type": "RollingUpdate" }`  |
 | `revisionHistoryLimit`               | The number of old Replicas to keep to allow rollback. | `0`                            |
 | `service.type`                       | Type of service to create                             | `ClusterIP`                    |
-| `service.annotations`                 | Annotations of service to create                      | `{}`                           |
+| `service.annotations`                | Annotations of service to create                      | `{}`                           |
 | `service.clusterIP`                  | Internal cluster service IP                           | `nil`                          |
 | `service.loadBalancerIP`             | IP address to assign to load balancer (if supported)  | `nil`                          |
 | `service.loadBalancerSourceRanges`   | list of IP CIDRs allowed access to lb (if supported)  | `[]`                           |
@@ -129,6 +130,7 @@ container. A dynamically managed Persistent Volume Claim is used to keep the
 data across deployments, by default. This is known to work in GCE, AWS, and
 minikube.
 Alternatively, a previously configured Persistent Volume Claim can be used.
+when using AWS EFS CSI dynamic provisioning the created volume doesn't support chown command.
 
 
 #### Existing PersistentVolumeClaim
